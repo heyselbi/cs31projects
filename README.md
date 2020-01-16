@@ -7,17 +7,17 @@ Project	names and scores
 
 1	100/100
 
-2	rate.cpp 91/100
+2	rental.cpp 91/100
 
 3	poll.cpp 99/100
 
 4	array.cpp 93/100
 
-5	p5.cpp 100/100
+5 rate.cpp 100/100
 
 6	25/25
 
-7	88/100
+7	zombies.cpp 88/100
 
 
 I do not have the full project descriptions for all assignments due to expiry of the website used for the class.
