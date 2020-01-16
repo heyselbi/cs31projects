@@ -20,6 +20,6 @@ Project	names and scores
 7	88/100
 
 
-I do not have the full project descriptions for all assignments due to expired website of the class.
+I do not have the full project descriptions for all assignments due to expiry of the website used for the class.
 
 Please do not copy the solutions but rather could use this as a guide/help. The main purpose of this is to store/backup my projects. Prof. Smallberg and the team has developed thorough screening techniques that detect any part of the code in the assignment that has been copied. He is also aware of these solutions posted on Github.
