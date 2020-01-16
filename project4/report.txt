@@ -1,0 +1,77 @@
+Project 4
+Selbi Nuryyeva
+UID: XXXX
+
+a. A brief description of notable obstacles you overcame.
+	The biggest obstacle I had was with "all functions that return an int must return −1 if they are passed any bad arguments (e.g. a negative array size, or a position that would require looking at the contents of an element past the last element we're interested in)."
+	I spent ~1h looking for a way that can measure the size of a string array, only to arrive at a conclusion that it is not possible without using the libraries. Later I noticed that what Professor meant was not that int n could be more than number of elements in an array (in fact the very next paragraph mentions it), but that sometimes they are not meant to be larger than let's say int pos variable.
+	The next obstacle I had was with flip function. Instead of "a[n-1-i]", I had "a[n-i]" initially for the last element of interest in an array and it kept giving me wrong answers. I then remembered that last index is always one less than the length of interest of an array.
+
+b. A list of the test data that could be used to thoroughly test your functions, along with the reason for each test. You must note which test cases your program does not handle correctly. (This could happen if you didn't have time to write a complete solution, or if you ran out of time while still debugging a supposedly complete solution.) Notice that most of this portion of your report can be written just after you read the requirements in this specification, before you even start designing your program.
+	
+	//Note: I am varying int n in functions --> this will make sure that portions are checked correctly too
+
+	string names[10] = { "grEg", "Ali", "ali", "2joe", "", " ", "Ali", "Ben", "grEg", "grEg" };
+
+	appendToAll(names, 4, "-a"); //return 4 and first four elements will have '-a' at the end
+	appendToAll(names, 0, "-a"); //return 0 and do not add anything to any element
+	appendToAll(names, -4, "-a"); //n is negative, return -1
+
+	lookup(names, 7, "Ali"); //appears twice but will return 1 
+	lookup(names, 7, "ben"); //ben is not on the list, return -1
+	lookup(names, 0, "Ali"); //return -1 --> no elements to analyze --> no Ali
+	lookup(names, -7, "ben"); //n is negative, return -1
+
+	positionOfMax(names, 7); //return 0. A tricky one because 'space' is also among the elements. As 'g' is of latest in alphabet (and highest in char value), 0th index is reported (9th index is higher number)
+	positionOfMax(names, 0); //return -1, no elements to analyze --> no latest alphabetic element
+	positionOfMax(names, -6); //n is negative, return -1
+
+	rotateLeft(names, 4, 0); //return 0. 0th indexed element is moved to 3rd index position and 1st and 2nd index elements are moved one up. Resulting names = {"Ali", "ali", "2joe", "grEg", "", " ", "Ali", "Ben", "grEg"}
+	rotateLeft(names, 4, 5); //return -1. Position is higher than numbers looked at
+	rotateLeft(names, 4, -5); //return -1. Position is negative number
+	rotateLeft(names, -4, 5); //return -1. n is negative number
+	rotateLeft(names, 0, 1); //return -1. no element to move
+
+	countRuns(names, 10); //return 9. 9 sequences
+	countRuns(names, 0); //return 0. No sequences
+	countRuns(names, -10); //return -1. n is negative number
+
+	flip(names, 9); //return 9. Order of elements is flipped.
+	flip(names, 0); //return 0. No element order is flipped.
+	flip(names, -9); //return -1. n is negative number
+
+	string names2[] = {"grEg", "Ali", "John"};
+	string names3[] = {"hello", "Ali", "John"};
+	differ(names, 10, names2, 3); //return 2. That's where it differs
+	differ(names, 10, names2, 1); //return 1. names2 runs out
+	differ(names, 10, names3, 3); //return 0. Differs right from beginning
+	differ(names, -10, names2, 3); //return -1. n1 is negative number
+	differ(names, 10, names2, -3); //return -1. n2 is negative number
+	differ(names, 10, names2, 0); //return -1? not sure but decided to give error because no element to analyze
+	differ(names, 0, names2, 3); //return -1? but decided to give error because no element to analyze
+
+	string names4[] = {"", " ", "Ali"};
+	string names5[] = {"2joe", "Ben"};
+	subsequence(names, 10, names4, 3); //return 4. names4 is appearing at 4th index position
+	subsequence(names, 10, names5, 2); //return -1. names does not contain names5
+	subsequence(names, -10, names5, 2); //return -1. n1 is negative number
+	subsequence(names, 10, names5, -2); //return -1. n2 is negative number
+	subsequence(names, 0, names5, 2); //return -1. n1 is 0, no names match
+	subsequence(names, 10, names5, 0); //return -1. n2 is 0, no names match
+
+	string names6[] = {"Ben", "", "grEg"};
+	lookupAny(names, 10, names6, 3); //return 0, "grEg" appears at 0th index although others exist too and grEg appears several times. 0th is the smallest index.
+	lookupAny(names, -10, names6, 3); //return -1. n1 is negative number
+	lookupAny(names, 10, names6, -3); //return -1. n2 is negative number
+	lookupAny(names, 0, names6, 3); //return -1. no elements appear because n1 is empty
+	lookupAny(names, 10, names6, 0); //return -1. no elements appear because n2 is empty
+
+	string names[8] = { "grEg", "Ali", "ali", "2joe", "Ali", "Ben", "grEg", "grEg" };
+	//removed "" and " " since it was creating ambiguity
+	divide(names, 8, "Todd"); //return 4. 2x'A', '2', 'B' are before it
+	divide(names, 8, "1"); //return 0, since all elements are >= than divider
+	divide(names, 8, "z"); //return 8 aka n. all elements are < than divider
+	divide(names, -8, "Todd"); //return -1. n is negative number
+	divide(names, 0, "Todd"); //return -1. nothing to analyze
+
+All tested and have given correct outputs as outlined here.
