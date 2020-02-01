@@ -1,24 +1,45 @@
 # cs31projects
+
 My projects from CS31 class at UCLA with Prof. David Smallberg in Fall 2018.
 
-Introduction to computer science via theory, applications, and programming. Basic data types, operators and control structures. Input/output. Procedural and data abstraction. Introduction to object-oriented software development. Functions, recursion. Arrays, strings, pointers. Abstract data types, object-oriented programming. Examples and exercises from computer science theory and applications.
+## Topics covered
 
-Project	names and scores
+- Introduction to computer science via theory, applications, and programming. 
 
-1	100/100
+- Basic data types, operators and control structures. 
 
-2	rental.cpp 91/100
+- Input/output. 
 
-3	poll.cpp 99/100
+- Procedural programming and data abstraction.
 
-4	array.cpp 93/100
+- Introduction to object-oriented software development. 
 
-5 rate.cpp 100/100
+- Functions, recursion. 
 
-6	25/25
+- Arrays, strings, pointers. 
 
-7	zombies.cpp 88/100
+- Abstract data types, object-oriented programming. 
 
+- Examples and exercises from computer science theory and applications.
+
+## Project	names and scores
+
+1. 100/100
+
+2. [rental.cpp](https://github.com/heyselbi/2018_CS31-projects/tree/master/project2), score: 91/100
+
+3. [poll.cpp](https://github.com/heyselbi/2018_CS31-projects/tree/master/project3), score: 99/100
+
+4. [array.cpp](https://github.com/heyselbi/2018_CS31-projects/tree/master/project4), score: 93/100
+
+5. [rate.cpp](https://github.com/heyselbi/2018_CS31-projects/tree/master/project5), score: 100/100
+
+6. 25/25
+
+7. [zombies.cpp](https://github.com/heyselbi/2018_CS31-projects/tree/master/project7), score: 88/100
+
+
+## Disclaimer
 
 I do not have the full project descriptions for all assignments due to expiry of the website used for the class.
 
