@@ -79,4 +79,4 @@ c. A list of the test data that could be used to thoroughly test your program, a
 
 **All tests were checked and passed.
 
-The only one I am not sure is even correct assumption to make, is when it tallies and finds a syntax error, should it or should it not calculate and reassign the seatTally?
+The only one I am not sure is even correct assumption to make, is when it tallies and finds a syntax error, should it or should it not calculate and reassign the seatTally.
