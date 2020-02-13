@@ -1,0 +1,231 @@
+Proj 6
+Name: Selbi Nuryyeva
+UID: XXXX
+
+1. a.    
+int main()
+{
+    int arr[3] = { 5, 10, 15 };
+    int* ptr = arr;
+
+    *ptr = 30;          // set arr[0] to 30
+    *(ptr + 1) = 20;      // set arr[1] to 20
+    *(ptr + 2) = 10;     // set arr[2] to 10
+
+    while (ptr < arr+3)
+    {
+        cout << *ptr << endl;    // print values
+        ptr++;
+    }
+}
+
+
+
+  b. It won't give the maximum because pointer is changed only within the function. Function must include "&" when declaring the pointer in the function
+
+void findMax(int arr[], int n, int* &pToMax)
+{
+    if (n <= 0) 
+        return;      // no items, no maximum!
+
+    pToMax = arr;
+
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] > *pToMax)
+             pToMax = arr + i;
+    }
+}       
+
+int main()
+{
+    int nums[4] = { 5, 3, 15, 6 };
+    int* ptr;
+
+    findMax(nums, 4, ptr);
+    cout << "The maximum is at address " << ptr << endl;
+    cout << "It's at position " << ptr - nums << endl;
+    cout << "Its value is " << *ptr << endl;
+}
+
+
+
+   c. It will not work because pointer is not initialized properly and is not pointing to any address.
+
+void computeCube(int n, int* ncubed)
+{
+    *ncubed = n * n * n;
+}
+
+int main()
+{
+    int number = 5;
+    int* ptr = &number;
+    computeCube(number, ptr); //now number has been changed to 125
+    cout << "Five cubed is " << *ptr << endl;  //address is where number is and it is 125
+}
+
+ 
+
+    d. A constant array is passed to a function, but the function attempts to modify the array. Hence a pointer should be introduced instead. 0's also should be changed to '\0' because it has to be a character.
+// return true if two C strings are equal
+bool strequal(const char* str1, const char* str2)
+{
+    while (*str1 != '\0'  &&  *str2 != 0)
+    {
+        if (*str1 != *str2)  // compare corresponding characters
+            return false;
+        str1++;            // advance to the next character
+        str2++;             //here we don't want to increment the value of the variable it is pointing to but to increment just the address
+    }
+    return *str1 == *str2;   // both ended at same time?
+}
+
+int main()
+{
+    char a[15] = "Zhou";
+    char b[15] = "Zou";
+
+    if (strequal(a,b))
+        cout << "They're the same person!\n";
+}
+
+
+
+    e. The program (specifically the getPtrToArray functions) creates a pointer to an array that is local to the function. Hence, after getPtrArray is executed, an array that the pointer was pointing to is destroyed. Pointer ends up having undefined behavior.
+
+
+
+
+2.  a. double* cat;
+    b. double mouse[5];
+    c. cat = (mouse + 4);
+    d. *cat = 25;
+    e. *(mouse+3) = 25;
+    f. cat = (cat-3);
+    g. cat[1] = 27;
+    h. cat[0] = 54;
+    i. bool b = (*cat == *(cat+1));
+    j. bool d = (cat == mouse);
+
+
+
+
+3.  a. 
+double mean(double* scores, int numScores)
+{
+    double tot = 0;
+    int index = 0;
+    while (index != numScores)
+    {
+        tot += *(scores+index);
+        index++;
+    }
+    return tot/numScores;
+}
+
+
+
+    b.     
+// This function searches through str for the character chr.
+// If the chr is found, it returns a pointer into str where
+// the character was first found, otherwise nullptr (not found).
+const char* findTheChar(const char str[], char chr)
+{
+    for (int k = 0; *(str+k) != '\0'; k++)
+        if (*(str + k) == chr)
+            return (str + k);
+    return nullptr;
+}
+
+
+
+    c. 
+// This function searches through str for the character chr.
+// If the chr is found, it returns a pointer into str where
+// the character was first found, otherwise nullptr (not found).
+const char* findTheChar(const char str[], char chr)
+{
+    for (; *str != '\0'; str++)
+        if (*str == chr)
+            return str;
+    return nullptr;
+}
+
+
+
+
+4. It prints:
+3
+4
+79
+-1
+9
+22
+19
+
+Explanations are shown within the code in comments --> "//"
+#include <iostream>
+using namespace std;
+
+int* maxwell(int* a, int* b) //creates a pointer pointing to a larger value between pointers a and b
+{
+    if (*a > *b)
+        return a;
+    else
+        return b;
+}
+
+void swap1(int* a, int* b) //swap the addresses of pointers a and b
+{
+    int* temp = a;
+    a = b;
+    b = temp;
+}
+
+void swap2(int* a, int* b) //swap the values of pointers a and b point to
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main()
+{
+    int array[6] = { 5, 3, 4, 17, 22, 19 };
+
+    int* ptr = maxwell(array, &array[2]); //initialize a pointer pointing at &array[0]
+    //since 5 at &array[0] is more than 3 at &array[2]
+    *ptr = -1; //set &array[0] value to -1
+    ptr += 2; //move pointer to &array[2]
+    ptr[1] = 9; //set &array[3] value to 9
+    *(array+1) = 79; //set &array[1] value to 79
+
+    cout << &array[5] - ptr << endl; //ptr is at &array[2]: 5-2 is 3. print 3.
+
+    //now the array = {-1, 79, 4, 9, 22, 19}
+    swap1(&array[0], &array[1]); //swap the addresses of &array[0] and &array[1]
+    //however it does not affect the values
+    swap2(array, &array[2]); //swap the values of &array[0] and &array[1]
+
+    //after swap, array = {4, 79, -1, 9, 22, 19}    
+    for (int i = 0; i < 6; i++)
+        cout << array[i] << endl; //prints each element of array shown above
+} 
+
+
+
+
+5.
+void removeS(char* p)
+{
+    char* editedP = p;
+    for (;*editedP != '\0'; p++)
+    {
+        if ((*p == 's') || (*p == 'S'))
+            continue;
+        *editedP = *p;
+        editedP++;
+    }
+}
+
