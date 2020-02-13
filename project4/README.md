@@ -50,7 +50,10 @@ int j = appendToAll(people, 5, "!!!");
 ```
 Return the position of a string in the array that is equal to target; if there is more than one such string, return the smallest position number of such a matching string. Return −1 if there is no such string. As noted above, case matters: Do not consider "SUe" to be equal to "sUE".
 
-`int positionOfMax(const string a[], int n); ` 
+```c++
+int positionOfMax(const string a[], int n); 
+```
+
 Return the position of a string in the array such that that string is >= every string in the array. 
 If there is more than one such string, return the smallest position in the array of such a string. 
 Return −1 if the array has no elements. For example: 
@@ -59,7 +62,11 @@ Return −1 if the array has no elements. For example:
 string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; 
 int k = positionOfMax(hero, 6); 
 // returns 3, since tony is latest 
-// in alphabetic order int rotateLeft(string a[], int n, int pos); 
+// in alphabetic order
+```
+
+```C++
+int rotateLeft(string a[], int n, int pos); 
 ```
 
 Eliminate the item at position pos by copying all elements after it one place to the left. Put the item that was thus eliminated into the last position of the array. Return the original position of the item that was moved to the end. Here's an example: 
@@ -68,7 +75,11 @@ Eliminate the item at position pos by copying all elements after it one place to
 string super[5] = { "logan", "clark", "peter", "sue", "reed" }; 
 int m = rotateLeft(super, 5, 1); 
 // returns 1 
-// super now contains: "logan", "peter", "sue", "reed", "clark" int countRuns(const string a[], int n);
+// super now contains: "logan", "peter", "sue", "reed", "clark"
+```
+
+```C++
+int countRuns(const string a[], int n);
 ```
 
 Return the number of sequences of one or more consecutive identical items in a. 
@@ -82,7 +93,11 @@ int p = countRuns(d, 9);
 // "bruce" 
 // "steve", "steve" 
 // "diana", "diana", "diana" 
-// "steve", "steve" int flip(string a[], int n); 
+// "steve", "steve" 
+```
+
+```C++
+int flip(string a[], int n);
 ```
 
 Reverse the order of the elements of the array and return n. For example, 
@@ -92,6 +107,9 @@ string folks[6] = { "bruce", "steve", "", "tony", "sue", "clark" };
 int q = flip(folks, 4); 
 // returns 4 
 // folks now contains: "tony" "" "steve" "bruce" "sue" "clark" 
+```
+
+```C++
 int differ(const string a1[], int n1, const string a2[], int n2); 
 ```
 
@@ -102,7 +120,11 @@ string folks[6] = { "bruce", "steve", "", "tony", "sue", "clark" };
 string group[5] = { "bruce", "steve", "clark", "", "tony" }; 
 int r = differ(folks, 6, group, 5); 
 // returns 2 int s = differ(folks, 2, group, 1); 
-// returns 1 int subsequence(const string a1[], int n1, const string a2[], int n2); 
+// returns 1 int 
+```
+
+```C++
+subsequence(const string a1[], int n1, const string a2[], int n2); 
 ```
 
 If all n2 elements of a2 appear in a1, consecutively and in the same order, then return the position in a1 where that subsequence begins. If the subsequence appears more than once in a1, return the smallest such beginning position in the array. Return −1 if a1 does not contain a2 as a contiguous subsequence. (Consider a sequence of 0 elements to be a subsequence of any sequence, even one with no elements, starting at position 0.) For example, 
@@ -113,7 +135,11 @@ string names1[10] = { "reed", "sue", "selina" };
 int t = subsequence(names, 6, names1, 3); 
 // returns 1 string names2[10] = { "logan", "selina" }; 
 int u = subsequence(names, 5, names2, 2); 
-// returns -1 int lookupAny(const string a1[], int n1, const string a2[], int n2); 
+// returns -1
+```
+
+```C++
+int lookupAny(const string a1[], int n1, const string a2[], int n2);
 ```
 
 Return the smallest position in a1 of an element that is equal to any of the elements in a2. Return −1 if no element of a1 is equal to any element of a2. For example, 
@@ -124,7 +150,11 @@ string set1[10] = { "clark", "bruce", "selina", "reed" };
 int v = lookupAny(names, 6, set1, 4); 
 // returns 1 (a1 has "reed" there) string set2[10] = { "tony", "diana" }; 
 int w = lookupAny(names, 6, set2, 2); 
-// returns -1 (a1 has none) int split(string a[], int n, string splitter); 
+// returns -1 (a1 has none) 
+
+```C++
+int split(string a[], int n, string splitter); 
+```
 ```
 
 Rearrange the elements of the array so that all the elements whose value is < splitter come before all the other elements, and all the elements whose value is > splitter come after all the other elements. Return the position of the first element that, after the rearrangement, is not < splitter, or n if there are no such elements. For example, 
