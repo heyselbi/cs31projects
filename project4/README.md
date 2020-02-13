@@ -39,7 +39,9 @@ Append value to the end of each of the n elements of the array and return n. [Of
 
 ```C++
 string people[5] = { "clark", "peter", "diana", "tony", "selina" }; 
+
 int j = appendToAll(people, 5, "!!!"); 
+
 // returns 5 
 // now people[0] is "clark!!!", people[1] is "peter!!!", ..., 
 // and people[4] is "selina!!!" int lookup(const string a[], int n, string target); 
