@@ -13,7 +13,11 @@ The program you turn in must build successfully, and during execution, no functi
 All of the functions you must write take at least two parameters: an array of strings, and the number of items the function will consider in the array, starting from the beginning. For example, in
 
 ```C++
-string people[5] = { "clark", "peter", "diana", "tony", "selina" }; int i = lookup(people, 3, "selina"); // should return -1 (not found) even though the array has 5 elements, only the first 3 had values we were interested in for this call to the function; the function must not examine the others.
+string people[5] = { "clark", "peter", "diana", "tony", "selina" }; 
+int i = lookup(people, 3, "selina"); 
+// should return -1 (not found) even though the array has 5 elements, 
+// only the first 3 had values we were interested in for this call to the function; 
+// the function must not examine the others.
 ```
 
 Notwithstanding each function's behavior described below, all functions that return an int must return −1 if they are passed any bad arguments (e.g. a negative array size, or a position that would require looking at the contents of an element past the last element we're interested in). Unless otherwise noted, passing 0 to the function as the array size is not itself an error; it merely indicates the function should examine no elements of the array.
@@ -39,9 +43,7 @@ Append value to the end of each of the n elements of the array and return n. [Of
 
 ```C++
 string people[5] = { "clark", "peter", "diana", "tony", "selina" }; 
-
 int j = appendToAll(people, 5, "!!!"); 
-
 // returns 5 
 // now people[0] is "clark!!!", people[1] is "peter!!!", ..., 
 // and people[4] is "selina!!!" int lookup(const string a[], int n, string target); 
