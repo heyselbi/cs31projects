@@ -55,7 +55,92 @@ string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; int k =
 // in alphabetic order int rotateLeft(string a[], int n, int pos); 
 ```
 
-Eliminate the item at position pos by copying all elements after it one place to the left. Put the item that was thus eliminated into the last position of the array. Return the original position of the item that was moved to the end. Here's an example: string super[5] = { "logan", "clark", "peter", "sue", "reed" }; int m = rotateLeft(super, 5, 1); // returns 1 // super now contains: "logan", "peter", "sue", "reed", "clark" int countRuns(const string a[], int n); Return the number of sequences of one or more consecutive identical items in a. string d[9] = { "tony", "bruce", "steve", "steve", "diana", "diana", "diana", "steve", "steve" }; int p = countRuns(d, 9); // returns 5 // The five sequences of consecutive identical items are // "tony" // "bruce" // "steve", "steve" // "diana", "diana", "diana" // "steve", "steve" int flip(string a[], int n); Reverse the order of the elements of the array and return n. For example, string folks[6] = { "bruce", "steve", "", "tony", "sue", "clark" }; int q = flip(folks, 4); // returns 4 // folks now contains: "tony" "" "steve" "bruce" "sue" "clark" int differ(const string a1[], int n1, const string a2[], int n2); Return the position of the first corresponding elements of a1 and a2 that are not equal. n1 is the number of interesting elements in a1, and n2 is the number of interesting elements in a2. If the arrays are equal up to the point where one or both runs out, return whichever value of n1 and n2 is less than or equal to the other. For example, string folks[6] = { "bruce", "steve", "", "tony", "sue", "clark" }; string group[5] = { "bruce", "steve", "clark", "", "tony" }; int r = differ(folks, 6, group, 5); // returns 2 int s = differ(folks, 2, group, 1); // returns 1 int subsequence(const string a1[], int n1, const string a2[], int n2); If all n2 elements of a2 appear in a1, consecutively and in the same order, then return the position in a1 where that subsequence begins. If the subsequence appears more than once in a1, return the smallest such beginning position in the array. Return −1 if a1 does not contain a2 as a contiguous subsequence. (Consider a sequence of 0 elements to be a subsequence of any sequence, even one with no elements, starting at position 0.) For example, string names[10] = { "logan", "reed", "sue", "selina", "bruce", "peter" }; string names1[10] = { "reed", "sue", "selina" }; int t = subsequence(names, 6, names1, 3); // returns 1 string names2[10] = { "logan", "selina" }; int u = subsequence(names, 5, names2, 2); // returns -1 int lookupAny(const string a1[], int n1, const string a2[], int n2); Return the smallest position in a1 of an element that is equal to any of the elements in a2. Return −1 if no element of a1 is equal to any element of a2. For example, string names[10] = { "logan", "reed", "sue", "selina", "bruce", "peter" }; string set1[10] = { "clark", "bruce", "selina", "reed" }; int v = lookupAny(names, 6, set1, 4); // returns 1 (a1 has "reed" there) string set2[10] = { "tony", "diana" }; int w = lookupAny(names, 6, set2, 2); // returns -1 (a1 has none) int split(string a[], int n, string splitter); Rearrange the elements of the array so that all the elements whose value is < splitter come before all the other elements, and all the elements whose value is > splitter come after all the other elements. Return the position of the first element that, after the rearrangement, is not < splitter, or n if there are no such elements. For example, string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; int x = split(hero, 6, "logan"); // returns 3 // hero must now be // "clark" "diana" "bruce" "peter" "tony" "reed" // or "diana" "bruce" "clark" "reed" "peter" "tony" // or one of several other orderings. // All elements < "logan" (i.e., "diana", "bruce", and "clark") // come before all others // All elements > "logan" (i.e., "tony", "peter", and "reed") // come after all others string hero2[4] = { "reed", "sue", "peter", "steve" }; int y = split(hero2, 4, "steve"); // returns 2 // hero2 must now be either // "reed" "peter" "steve" "sue" // or "peter" "reed" "steve" "sue" // All elements < "steve" (i.e., "peter" and "reed") come // before all others. // All elements > "steve" (i.e., "sue") come after all others. For each of the functions rotateLeft, flip, and split, if the function is correctly implemented, you will earn one bonus point for that function if it does its job without creating any additional array.
+Eliminate the item at position pos by copying all elements after it one place to the left. Put the item that was thus eliminated into the last position of the array. Return the original position of the item that was moved to the end. Here's an example: 
+
+```C++
+string super[5] = { "logan", "clark", "peter", "sue", "reed" }; int m = rotateLeft(super, 5, 1); 
+// returns 1 
+// super now contains: "logan", "peter", "sue", "reed", "clark" int countRuns(const string a[], int n);
+```
+
+Return the number of sequences of one or more consecutive identical items in a. 
+
+```C++
+string d[9] = { "tony", "bruce", "steve", "steve", "diana", "diana", "diana", "steve", "steve" }; int p = countRuns(d, 9); 
+// returns 5 
+// The five sequences of consecutive identical items are 
+// "tony" 
+// "bruce" 
+// "steve", "steve" 
+// "diana", "diana", "diana" 
+// "steve", "steve" int flip(string a[], int n); 
+```
+
+Reverse the order of the elements of the array and return n. For example, 
+
+```C++
+string folks[6] = { "bruce", "steve", "", "tony", "sue", "clark" }; int q = flip(folks, 4); 
+// returns 4 
+// folks now contains: "tony" "" "steve" "bruce" "sue" "clark" 
+int differ(const string a1[], int n1, const string a2[], int n2); 
+```
+
+Return the position of the first corresponding elements of a1 and a2 that are not equal. n1 is the number of interesting elements in a1, and n2 is the number of interesting elements in a2. If the arrays are equal up to the point where one or both runs out, return whichever value of n1 and n2 is less than or equal to the other. For example, 
+
+```C++
+string folks[6] = { "bruce", "steve", "", "tony", "sue", "clark" }; 
+string group[5] = { "bruce", "steve", "clark", "", "tony" }; 
+int r = differ(folks, 6, group, 5); 
+// returns 2 int s = differ(folks, 2, group, 1); 
+// returns 1 int subsequence(const string a1[], int n1, const string a2[], int n2); 
+```
+
+If all n2 elements of a2 appear in a1, consecutively and in the same order, then return the position in a1 where that subsequence begins. If the subsequence appears more than once in a1, return the smallest such beginning position in the array. Return −1 if a1 does not contain a2 as a contiguous subsequence. (Consider a sequence of 0 elements to be a subsequence of any sequence, even one with no elements, starting at position 0.) For example, 
+
+```C++
+string names[10] = { "logan", "reed", "sue", "selina", "bruce", "peter" }; 
+string names1[10] = { "reed", "sue", "selina" }; 
+int t = subsequence(names, 6, names1, 3); 
+// returns 1 string names2[10] = { "logan", "selina" }; 
+int u = subsequence(names, 5, names2, 2); 
+// returns -1 int lookupAny(const string a1[], int n1, const string a2[], int n2); 
+```
+
+Return the smallest position in a1 of an element that is equal to any of the elements in a2. Return −1 if no element of a1 is equal to any element of a2. For example, 
+
+```C++
+string names[10] = { "logan", "reed", "sue", "selina", "bruce", "peter" }; 
+string set1[10] = { "clark", "bruce", "selina", "reed" }; 
+int v = lookupAny(names, 6, set1, 4); 
+// returns 1 (a1 has "reed" there) string set2[10] = { "tony", "diana" }; 
+int w = lookupAny(names, 6, set2, 2); 
+// returns -1 (a1 has none) int split(string a[], int n, string splitter); 
+```
+
+Rearrange the elements of the array so that all the elements whose value is < splitter come before all the other elements, and all the elements whose value is > splitter come after all the other elements. Return the position of the first element that, after the rearrangement, is not < splitter, or n if there are no such elements. For example, 
+
+```C++
+string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; int x = split(hero, 6, "logan"); 
+// returns 3 
+// hero must now be 
+// "clark" "diana" "bruce" "peter" "tony" "reed" 
+// or "diana" "bruce" "clark" "reed" "peter" "tony" 
+// or one of several other orderings. 
+// All elements < "logan" (i.e., "diana", "bruce", and "clark") 
+// come before all others 
+// All elements > "logan" (i.e., "tony", "peter", and "reed") 
+// come after all others string hero2[4] = { "reed", "sue", "peter", "steve" }; 
+int y = split(hero2, 4, "steve"); 
+// returns 2 
+// hero2 must now be either 
+// "reed" "peter" "steve" "sue" 
+// or "peter" "reed" "steve" "sue" 
+// All elements < "steve" (i.e., "peter" and "reed") come 
+// before all others. 
+// All elements > "steve" (i.e., "sue") come after all others. 
+```
+
+For each of the functions rotateLeft, flip, and split, if the function is correctly implemented, you will earn one bonus point for that function if it does its job without creating any additional array.
 
 Your program must not use any function templates from the algorithms portion of the Standard C++ library. If you don't know what the previous sentence is talking about, you have nothing to worry about.
 
@@ -65,11 +150,15 @@ Your program must build successfully under both g31 and either Visual C++ or cla
 
 The correctness of your program must not depend on undefined program behavior. Your program could not, for example, assume anything about t's value in the following, or even whether or not the program crashes:
 
+```C++
 int main()
 {
     string s[3] = { "bruce", "selina", "clark" };
     string t = s[3];   // position 3 is out of range
     …
+ }
+ ```
+ 
 What you will turn in for this assignment is a zip file containing these two files and nothing more:
 
 A text file named array.cpp that contains the source code for your C++ program. Your source code should have helpful comments that explain any non-obvious code.
