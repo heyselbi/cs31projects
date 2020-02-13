@@ -44,6 +44,9 @@ bool hasProperSyntax(string pollData)
 		upperPollData += toupper(pollData[k]);
 	}	
 
+	if (upperPollData.size() < 1)
+		return true;
+
 	//Step 3: now we are going to analyze each state forecast one by one
 	//by slicing upperPollData into separate state forecasts
 	string stateForecast = "";
@@ -111,19 +114,30 @@ bool hasProperSyntax(string pollData)
 	return true;
 }
 
+
+/*1- Check proper syntax of pollData
+2- Proper syntax of party code
+3- Capitalize both party and pollData so it is consistent to work with
+4- Slice the pollData into state forecasts separated by comma
+5- If state forecast has no forecasts, skip; If it does, analyze chars after state code.
+6- While scanning forecasts, if you bump into party code of interest, copy the digits before it. They are copied in reverse order
+7- Convert digit (string type) into char
+8- Convert char into int
+9- Sum up int (ie. 5 + 4*10 + 1*100) depending on their relative position index
+10- Repeat for all state forecasts and sum up all at the end*/
 int tallySeats(string pollData, char party, int& seatTally)
 {
+	//1- Check proper syntax of pollData
 	if (!hasProperSyntax(pollData))
 		return 1;
+	//2- Proper syntax of party code
 	if (!isalpha(party))
 		return 2;
 
-	//let's capitalize party character so it is easier to work with and consistent
+	//3- Capitalize both party and pollData so it is consistent to work with
 	string upperParty = "";
 	upperParty += toupper(party);
-	cout << "This is line 123, upperParty = " << upperParty << endl;
 
-	//let's capitalize pollData like we did in earlier function so it is all consistent
 	string upperPollData;
 	for (string::size_type k = 0; k != pollData.size(); k++)
 		upperPollData += toupper(pollData[k]);
@@ -132,25 +146,21 @@ int tallySeats(string pollData, char party, int& seatTally)
 	upperPollData += ","; //so last stateForecast can be analyzed too
 	string stateForecast = "";
 
-	cout << "This is line 135, upperPollData = " << upperPollData << endl;
-
+	//4- Slice the pollData into state forecasts separated by comma
 	for (string::size_type j = 0; j != upperPollData.size(); j++)
 	{
 		stateForecast += upperPollData[j];
-		cout << "This is line 140, stateForecast = " << stateForecast << endl;
 		//if you bump into comma, your stateForecast is ready to be analyzed
 		if (upperPollData[j] == ',')
 		{
-			/*//if state forecast is empty, move to next one
+			/*//if state forecast is empty, move to next one ==> has been clarified by professor
 			if (stateForecast == ",")
 			{
 				cout << "This is line 147, stateForecast empty " << stateForecast << endl;
 				stateForecast = ""; continue;
 			}*/
 
-			cout << "This is line 151, final stateForecast = " << stateForecast << endl;
-
-			//if state forecast is just VT, (three chars), move to next state forecast
+			//5- If state forecast has no forecasts, skip
 			if (stateForecast.size() < 4)
 			{
 				stateForecast = "";
@@ -160,35 +170,31 @@ int tallySeats(string pollData, char party, int& seatTally)
 			//Let's analyze only those ones that have forecasts (ie. analyze if CT8R, and not analyze if just VT)
 			if (stateForecast.size() > 3) //three because comma is included (ie. VT,)
 			{
-				cout << "This is line 163, stateForecast analysis begin with " << stateForecast << endl;
 				//Starting at index 2 (statecode is index 0 and 1) analyze stateForecast
 				int stateForecastSum = 0;
 				for (string::size_type i = 2; i != stateForecast.size(); i++) //stateForecast analysis (ie. NY12R110D)
 				{	
-					cout << "This is line 168, party is " << party << endl;
-					if (stateForecast[i] == upperParty[0]) //D is at position 8; i =8
+					//6- While scanning forecasts, if you bump into party code of interest, copy the digits before it. 
+					//They are copied in reverse order
+					if (stateForecast[i] == upperParty[0]) 
 					{
-						cout << "This is line 170, location of R (i) is = " << i << endl;
-						string stateForecastNumber = ""; //slicing the number
+						string stateForecastNumber = ""; //string for number of party votes
 
-						for (string::size_type m = (i-1); m > 1; m--) //i=8, m=7
+						//go in reverse and copy the chars
+						for (string::size_type m = (i-1); m > 1; m--)
 						{
 							if (isalpha(stateForecast[m]))
 								break;
-							cout << "This is line 175, i and m are " << i << " " << m << endl;
-							stateForecastNumber += stateForecast[m]; //stateForecastNumber = 011 (ie. 110)
-							cout << "This is line 177, stateForecastNumber = " << stateForecastNumber << endl;
+							//7- Convert string type party vote number into char in reverse order since we are going backwards
+							stateForecastNumber += stateForecast[m]; //stateForecastNumber = 011 in reverse (ie. real is 110)
 							
 						}
 						
 						int conv;
-						//stateForecastNumber = 011 (ie. 110)
-						cout << "This is line 184, final stateForecastNumber = " << stateForecastNumber << endl;
+						//8- Convert char into int
 						for (string::size_type n = 0; n != stateForecastNumber.size(); n++) 
 						{
-							conv = stateForecastNumber[n]; //n=0, Number = 48
-							cout << "This is line 188, conv = " << conv << endl;
-							cout << "Character number " << n << " of stateForecastNumber is " << conv << endl;
+							conv = stateForecastNumber[n];
 							switch (conv)
 							{
 							case 48: //ASCII
@@ -232,8 +238,7 @@ int tallySeats(string pollData, char party, int& seatTally)
 								conv = 9;
 								break;
 							}
-							cout << "This is line 233, converted conv = " << conv << endl;
-							cout << "This is line 234, n is = " << n << endl;
+							//9- Sum up int (ie. 5 + 4*10 + 1*100) depending on their relative position index
 							if (n == 0)
 								stateForecastSum += conv;
 							else
@@ -241,21 +246,18 @@ int tallySeats(string pollData, char party, int& seatTally)
 								int power = pow(10.0, n);
 								stateForecastSum += (conv * power);
 							}
-							cout << "This is line 236, stateForecastSum = " << stateForecastSum << endl;
 						}
 					}
 				}
-				cout << "This is line 240, pollSum before = " << pollSum << endl;
+				//10- Repeat for all state forecasts and sum up all at the end
 				pollSum += stateForecastSum;
-				cout << "This is line 242, pollSum after = " << pollSum << endl;
 			}
 			
 			stateForecast = "";
 		} //reset stateForecast to empty string for a new analysis
 		
 	}
-	
-	cout << "This is line 249, pollSum final = " << pollSum << endl;
+	//assign total to seatTally that is returned
 	seatTally = pollSum;
 	return 0;
 }
@@ -266,21 +268,15 @@ int main()
 	{
 		cout << "Enter poll data string: ";
 		string pollData;
-		//pollData = "NY1I,NC10D,CT9R7D,VT,CA7D8I";
 		getline(cin, pollData);
+
 		cout << hasProperSyntax(pollData) << endl;
+
 		int s;
 		cout << tallySeats(pollData, 'r', s) << endl;
 		cout << s << endl;
 
-		//string pds;
-		//getline(cin, pds);
 		if (pollData == "quit")
 			break;
-		
-		//cout << "hasProperSyntax returns ";
-		//assert(hasProperSyntax(pds));
-		//assert(!hasProperSyntax(pds));
-		//cout << endl;
 	}
 }
