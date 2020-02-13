@@ -1,0 +1,82 @@
+//Name: Selbi Nuryyeva
+//UID: XXXXXXX
+
+a. A brief description of notable obstacles you overcame.
+
+My biggest struggle was structuring my plan of attack overall. As mentioned in FAQs, I really did not know where to begin. Biggest obstacle was I was not sure how to get state forecasts separately. Initially, I looked for commas and scanned chars before the comma for mistakes. But that quickly got way too complicated because of too many rules. Then I took a day off to think about it, and remembered we can save chars as we scan through. Once I figured that out, rest was easy.
+I also was not sure how to go about conversion of strings to integers that can be summed up. But after reading lecture notes, I figured they can be done via char conversion. I wondered if there is an easier way of converting strings into integers, besides writing a switch code for converison.
+
+
+b. A description of the design of your program
+
+==> In bool hasProperSyntax(string pollData) I first check the overall syntax.
+...
+repeatedly:
+	check for blanks in poll data
+	capitalize all letters so it is easier to work with and is consistent
+..
+
+==> Then slice out the forecasts and analyze them character by character
+...
+repeatedly:
+	save chars from poll data until you bump into comma
+	once comma is found, your state forecast is ready to be analyzed
+		check state code is correct
+		if no forecasts exist for state, skip it
+		if forecasts do exist for state, analyze it
+			check that there are no other letters after state code, but should be a digit
+			repeatedly:
+				look for the party code in state forecast
+				check that there is a digit before and after party code (for all party codes except the last one in state forecast)
+				check that there are no other chars but letters and digits in overall forecast
+			for last party code that was not checked above:
+				check that it is at the end of the state forecast
+				check that it has a digit and not letter before it
+	if all above test passed successfully, report the syntax correct.
+....
+
+==> In int tallySeats(string pollData, char party, int& seatTally) I first check the proper syntax, then tally the number of votes
+	check if poll data has proper syntax
+	check is party code is correct (ie. a letter)
+	capitalize all letters in party code and poll data so it is easier to work with and is consistent
+	repeatedly:
+		save chars from poll data until you bump into comma
+		once comma is found, your state forecast is ready to be analyzed
+		for states that have forecasts:
+			find the party code and record its tally
+			convert tally number in string type to char type
+			convert chars to integers
+			sum up integers in proper way to get the same tally
+			sum up all tallies for the party
+	report the sum and return 0
+..
+
+c. A list of the test data that could be used to thoroughly test your program, along with the reason for each test.
+
+==> Errors in pollData syntax. There is/are...
+
+- incorrect stateCode: int r = tallySeats("NC12R01D,XZ34I56D", 'D', s); --> XZ is not a state code 
+- empty space: int r = tallySeats("NC12R01D, NY34I56D", 'D', s); --> space between , and N
+- character that is not a digit or alphabetic: int r = tallySeats("NC12R-01D,NY34I56D", 'D', s); --> "-" between R and 0
+- no digit after stateCode: int r = tallySeats("NCR01D,NY34I56D", 'D', s); --> There should be a tally number between NC and R, even it is 0
+- two commas consecutive: int r = tallySeats("NC12R01D,,NY34I56D", 'D', s); --> ,, not allowed
+- a comma at the end: int r = tallySeats("NC12R01D,NY34I56D,", 'D', s); --> there should be no "," after D
+- more than one letter for partyCode: int r = tallySeats("NC12R01D,NY34IN56D", 'D', s); --> ..IN.. has to be just I. It will also catch if no digit before party letter
+
+- States with no forecasts are read correctly: int r = tallySeats("NC12R01D,VT,NY34I56D", 'D', s); --> this has correct syntax even if VT has no forecasts
+- PollData that is empty is read correctly: int r = tallySeats("", 'D', s) --> no syntax error and returns 0 for r and 0 for s
+
+
+==> Errors in summing up tallies.
+
+- tallying all up even if state forecast reported R votes twice: int r = tallySeats("NC12R01D15R,NY34I56D", 'R', s) --> NC has (12+15) R votes, not just 12
+- tallies up correctly across state forecasts: int r = tallySeats("NC12R01D,NY34I56D,NH6R,CT7D", 'D', s) --> tally is (1+56+7) = 64
+- incorrect pollData syntax returns 1: int r = tallySeats("NC12R01D,XZ34I56D", 'D', s) --> incorrect syntax of pollData (ie. state code is wrong)
+- incorrect party code syntax returns 2: int r = tallySeats("NC12R01D,NY34I56D", '2', s) --> party code should be an alphabetic character
+- party code is not a character at all: int r = tallySeats("NC12R01D,NY34I56D", "D", s) --> should give error because D is a string here
+- any non-capital letters are recognized fine: int r = tallySeats("nC12r01D,Vt,Ny34I56d", 'd', s) --> should give true for both the poll data and party code and tally
+- works with one or 50 digits for vote count: int r = tallySeats("nC120r1D,Vt,Ny34I567d", 'd', s) --> total sum is (1+567) = 568
+
+**All tests were checked and passed.
+
+The only one I am not sure is even correct assumption to make, is when it tallies and finds a syntax error, should it or should it not calculate and reassign the seatTally?
