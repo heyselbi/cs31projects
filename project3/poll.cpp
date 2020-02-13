@@ -269,6 +269,7 @@ int main()
 		cout << "Enter poll data string: ";
 		string pollData;
 		getline(cin, pollData);
+		//pollData = "NY1I,NC10D,CT9R7D,VT,CA7D8I";
 
 		cout << hasProperSyntax(pollData) << endl;
 
