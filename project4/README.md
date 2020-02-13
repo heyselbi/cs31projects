@@ -21,7 +21,8 @@ Notwithstanding each function's behavior described below, all functions that ret
 The one error your function implementations don't have to handle, because they can't, is when the caller of the function lies and says the array is bigger than it really is. For example, in this situation, the function lookup can't possibly know that the caller is lying about the number of interesting items in the array:
 
 ```C++
-string people[5] = { "clark", "peter", "diana", "tony", "selina" }; int i = lookup(people, 25, "logan"); 
+string people[5] = { "clark", "peter", "diana", "tony", "selina" }; 
+int i = lookup(people, 25, "logan"); 
 // Bad call of function, but 
 // your lookup implementation doesn't have to check for 
 // this, because it can't. 
@@ -37,7 +38,8 @@ int appendToAll(string a[], int n, string value);
 Append value to the end of each of the n elements of the array and return n. [Of course, in this and other functions, if n is negative, the paragraph above that starts "Notwithstanding" trumps this by requiring that the function return −1. Also, in the description of this function and the others, when we say "the array", we mean the n elements that the function is aware of.] For example:
 
 ```C++
-string people[5] = { "clark", "peter", "diana", "tony", "selina" }; int j = appendToAll(people, 5, "!!!"); 
+string people[5] = { "clark", "peter", "diana", "tony", "selina" }; 
+int j = appendToAll(people, 5, "!!!"); 
 // returns 5 
 // now people[0] is "clark!!!", people[1] is "peter!!!", ..., 
 // and people[4] is "selina!!!" int lookup(const string a[], int n, string target); 
@@ -50,7 +52,8 @@ If there is more than one such string, return the smallest position in the array
 Return −1 if the array has no elements. For example: 
 
 ```C++
-string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; int k = positionOfMax(hero, 6); 
+string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; 
+int k = positionOfMax(hero, 6); 
 // returns 3, since tony is latest 
 // in alphabetic order int rotateLeft(string a[], int n, int pos); 
 ```
@@ -58,7 +61,8 @@ string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; int k =
 Eliminate the item at position pos by copying all elements after it one place to the left. Put the item that was thus eliminated into the last position of the array. Return the original position of the item that was moved to the end. Here's an example: 
 
 ```C++
-string super[5] = { "logan", "clark", "peter", "sue", "reed" }; int m = rotateLeft(super, 5, 1); 
+string super[5] = { "logan", "clark", "peter", "sue", "reed" }; 
+int m = rotateLeft(super, 5, 1); 
 // returns 1 
 // super now contains: "logan", "peter", "sue", "reed", "clark" int countRuns(const string a[], int n);
 ```
@@ -66,7 +70,8 @@ string super[5] = { "logan", "clark", "peter", "sue", "reed" }; int m = rotateLe
 Return the number of sequences of one or more consecutive identical items in a. 
 
 ```C++
-string d[9] = { "tony", "bruce", "steve", "steve", "diana", "diana", "diana", "steve", "steve" }; int p = countRuns(d, 9); 
+string d[9] = { "tony", "bruce", "steve", "steve", "diana", "diana", "diana", "steve", "steve" }; 
+int p = countRuns(d, 9); 
 // returns 5 
 // The five sequences of consecutive identical items are 
 // "tony" 
@@ -79,7 +84,8 @@ string d[9] = { "tony", "bruce", "steve", "steve", "diana", "diana", "diana", "s
 Reverse the order of the elements of the array and return n. For example, 
 
 ```C++
-string folks[6] = { "bruce", "steve", "", "tony", "sue", "clark" }; int q = flip(folks, 4); 
+string folks[6] = { "bruce", "steve", "", "tony", "sue", "clark" }; 
+int q = flip(folks, 4); 
 // returns 4 
 // folks now contains: "tony" "" "steve" "bruce" "sue" "clark" 
 int differ(const string a1[], int n1, const string a2[], int n2); 
@@ -120,7 +126,8 @@ int w = lookupAny(names, 6, set2, 2);
 Rearrange the elements of the array so that all the elements whose value is < splitter come before all the other elements, and all the elements whose value is > splitter come after all the other elements. Return the position of the first element that, after the rearrangement, is not < splitter, or n if there are no such elements. For example, 
 
 ```C++
-string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; int x = split(hero, 6, "logan"); 
+string hero[6] = { "clark", "peter", "reed", "tony", "diana", "bruce" }; 
+int x = split(hero, 6, "logan"); 
 // returns 3 
 // hero must now be 
 // "clark" "diana" "bruce" "peter" "tony" "reed" 
