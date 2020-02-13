@@ -151,10 +151,10 @@ int v = lookupAny(names, 6, set1, 4);
 // returns 1 (a1 has "reed" there) string set2[10] = { "tony", "diana" }; 
 int w = lookupAny(names, 6, set2, 2); 
 // returns -1 (a1 has none) 
+```
 
 ```C++
 int split(string a[], int n, string splitter); 
-```
 ```
 
 Rearrange the elements of the array so that all the elements whose value is < splitter come before all the other elements, and all the elements whose value is > splitter come after all the other elements. Return the position of the first element that, after the rearrangement, is not < splitter, or n if there are no such elements. For example, 
